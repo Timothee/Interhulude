@@ -1,0 +1,12 @@
+{
+	"name": "MuteHuluAds",
+	"version": "1.0",
+	"manifest_version": 2,
+	"description": "Automatically mutes ads while you watch videos on Hulu.",
+	"content_scripts": [
+		{
+			"matches": ["http://www.hulu.com/*"],
+			"js": ["mutehulu.js"]
+		}
+	]
+}
