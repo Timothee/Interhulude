@@ -1,8 +1,8 @@
 {
 	"name": "MuteHuluAds",
-	"version": "1.0",
+	"version": "1.1",
 	"manifest_version": 2,
-	"description": "Automatically mutes ads while you watch videos on Hulu.",
+	"description": "Automatically mutes ads while you watch videos on Hulu. (and restores the volume when content comes back)",
 	"content_scripts": [
 		{
 			"matches": ["http://www.hulu.com/*"],
