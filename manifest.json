@@ -1,8 +1,8 @@
 {
-	"name": "MuteHuluAds",
-	"version": "1.1.3.1",
+	"name": "Interhulude",
+	"version": "1.1.3.2",
 	"manifest_version": 2,
-	"description": "Automatically mutes ads while you watch videos on Hulu. (and restores the volume when content comes back)",
+	"description": "Automatically mutes and hides  ads while you watch videos on Hulu. (and restores the volume when content comes back)",
 	"icons": {
 		"16": "logo-16x16.png",
 		"48": "logo-48x48.png",
@@ -11,7 +11,7 @@
 	"content_scripts": [
 		{
 			"matches": ["http://www.hulu.com/*"],
-			"js": ["mutehulu.js"]
+			"js": ["interhulude.js"]
 		}
 	]
 }
