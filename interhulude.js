@@ -1,6 +1,6 @@
 (function() {
 	var player, lastStateSeen;
-	var pauseOnReturn = false;
+	var pauseOnReturn = localStorage["Interhulude:pauseOnReturn"] || false;
 	var mask = document.createElement('div');
 	var showNameDiv, pauseOnReturnDiv, dismissDiv;
 	var maskSetup = false;
@@ -30,7 +30,7 @@
 	}
 
 	function togglePause() {
-		pauseOnReturn = !pauseOnReturn;
+		pauseOnReturn = localStorage["Interhulude:pauseOnReturn"] = !pauseOnReturn;
 		pauseOnReturnDiv.className = pauseOnReturn ? "checked" : "unchecked";
 	}
 
@@ -56,6 +56,7 @@
 			pauseOnReturnDiv.id = "InterhuludePauseOnReturn";
 			pauseOnReturnDiv.onclick = togglePause;
 			pauseOnReturnDiv.innerHTML = "<span>&#x2713;</span> Pause when the show comes back";
+			pauseOnReturnDiv.className = pauseOnReturn ? "checked" : "unchecked";
 
 			dismissDiv = document.createElement('div');
 			dismissDiv.id = "InterhuludeClickToDismiss";
