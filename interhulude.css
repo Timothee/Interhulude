@@ -1,3 +1,9 @@
+#InterhuludeMask {
+	position: absolute;
+	background-color: black;
+	color: white;
+	z-index: 10000;
+}
 #InterhuludeMask div {
 	font-family: Flama;
 }
@@ -15,16 +21,25 @@
 	font-weight: 500;
 }
 #InterhuludePauseOnReturn {
+	font-size: 26px;
 	position: absolute;
 	margin: 0px auto;
 	width: 100%;
 	bottom: 100px;
+	cursor: pointer;
 }
-
+#InterhuludePauseOnReturn span {
+	text-shadow: white 0px 0px 2px;
+	position: relative;
+	top: 2px;
+}
+#InterhuludePauseOnReturn.unchecked span { color: black; }
+#InterhuludePauseOnReturn.checked span { color: white; }
 #InterhuludeClickToDismiss {
 	font-size: 20px;
 	position: absolute;
 	margin: 0px auto;
 	width: 100%;
 	bottom: 30px;
+	cursor: pointer;
 }

@@ -2,6 +2,8 @@
 	var player, lastStateSeen;
 	var pauseOnReturn = false;
 	var mask = document.createElement('div');
+	var showNameDiv, pauseOnReturnDiv, dismissDiv;
+	var maskSetup = false;
 	var masked = false;
 
 	function log(message) {
@@ -27,29 +29,55 @@
 		masked = false;
 	}
 
-	function setMask() {
-		mask.id = "InterhuludeMask";
-		mask.style.position = "absolute";
+	function togglePause() {
+		pauseOnReturn = !pauseOnReturn;
+		pauseOnReturnDiv.className = pauseOnReturn ? "checked" : "unchecked";
+	}
+
+	function updateMask() {
 		mask.style.width = player.offsetWidth + "px";
 		mask.style.height = player.offsetHeight + "px";
 		mask.style.top = player.offsetTop + "px";
 		mask.style.left = player.offsetLeft + "px";
-		mask.style.backgroundColor = "black";
-		mask.style.color = "white";
-		mask.style.zIndex = 10000;
-		var showName = document.getElementsByClassName('show-title')[0] ? document.getElementsByClassName('show-title')[0].innerHTML : "Your show";
-		mask.innerHTML = "<div id='InterhuludeShowName'><span>" + showName + "</span> will return in a moment.</div>" +
-//			"<div id='InterhuludePauseOnReturn'>Pause when the show comes back</div>" +
-			"<div id='InterhuludeClickToDismiss'>(click to dismiss)</div>";
 
-		mask.onclick = unmaskVideo;
+		var showName = document.getElementsByClassName('show-title')[0] ? document.getElementsByClassName('show-title')[0].innerHTML : "Your show";
+		showNameDiv.innerHTML = "<span>" + showName + "</span> will return in a moment.";
+	}
+
+	function setMask() {
+		if (!maskSetup) {
+			mask.id = "InterhuludeMask";
+
+			showNameDiv = document.createElement('div');
+			showNameDiv.id = "InterhuludeShowName";
+			showNameDiv.innerHTML = "<span>Your show</span> will return in a moment.";
+
+			pauseOnReturnDiv = document.createElement('div');
+			pauseOnReturnDiv.id = "InterhuludePauseOnReturn";
+			pauseOnReturnDiv.onclick = togglePause;
+			pauseOnReturnDiv.innerHTML = "<span>&#x2713;</span> Pause when the show comes back";
+
+			dismissDiv = document.createElement('div');
+			dismissDiv.id = "InterhuludeClickToDismiss";
+			dismissDiv.innerHTML = "(click here to dismiss)";
+			dismissDiv.onclick = unmaskVideo;
+
+			mask.appendChild(showNameDiv);
+			mask.appendChild(pauseOnReturnDiv);
+			mask.appendChild(dismissDiv);
+
+			maskSetup = true;
+		}
 	}
 
 	window.setInterval(function() {
 		if (!player || !player.getCurrentState) {
 			player = document.getElementById('player');
 		} else {
-			setMask();
+			if (!maskSetup) {
+				setMask();
+			}
+			updateMask();
 			var currentState = player.getCurrentState().subState;
 			if (currentState != lastStateSeen && currentState != "loading") {
 				lastStateSeen = currentState;
