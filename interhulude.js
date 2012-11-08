@@ -1,7 +1,8 @@
 (function() {
-	var player;
-	var lastStateSeen;
+	var player, lastStateSeen;
+	var pauseOnReturn = false;
 	var mask = document.createElement('div');
+	var masked = false;
 
 	function log(message) {
 		console.log("[Interhulude] " + message);
@@ -10,14 +11,20 @@
 	function maskVideo() {
 		setMask();
 		log("Masking video");
-		player.mute();
+		if (player.getVolume && player.getVolume() != 0) {
+			player.mute();
+		}
 		player.parentElement.appendChild(mask);
+		masked = true;
 	}
 
 	function unmaskVideo() {
 		log("Unmasking video");
-		player.unMute();
+		if (player.getVolume && player.getVolume() == 0) {
+			player.unMute();
+		}
 		player.parentElement.removeChild(mask);
+		masked = false;
 	}
 
 	function setMask() {
@@ -31,23 +38,33 @@
 		mask.style.color = "white";
 		mask.style.zIndex = 10000;
 		var showName = document.getElementsByClassName('show-title')[0] ? document.getElementsByClassName('show-title')[0].innerHTML : "Your show";
-		mask.innerHTML = "<h1>" + showName + " will return in a moment.</h1>" + "<p>(click to dismiss)</p>";
+		mask.innerHTML = "<div id='InterhuludeShowName'><span>" + showName + "</span> will return in a moment.</div>" +
+//			"<div id='InterhuludePauseOnReturn'>Pause when the show comes back</div>" +
+			"<div id='InterhuludeClickToDismiss'>(click to dismiss)</div>";
+
 		mask.onclick = unmaskVideo;
 	}
 
 	window.setInterval(function() {
-		if (!player) {
+		if (!player || !player.getCurrentState) {
 			player = document.getElementById('player');
 		} else {
-			if (player.getCurrentState && player.getCurrentState().subState != lastStateSeen) {
-				if (player.getCurrentState().subState == "content") {
-					if (player.getVolume() == 0) {
+			setMask();
+			var currentState = player.getCurrentState().subState;
+			if (currentState != lastStateSeen && currentState != "loading") {
+				lastStateSeen = currentState;
+				if (currentState == "content") {
+					if (masked) {
 						unmaskVideo();
 					}
-				} else if (player.getVolume && player.getVolume()) {
-					maskVideo();
+					if (pauseOnReturn) {
+						player.pauseVideo();
+					}
+				} else {
+					if (!masked) {
+						maskVideo();
+					}
 				}
-				lastStateSeen = player.getCurrentState().subState;
 			}
 		}
 	}, 1000);

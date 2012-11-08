@@ -1,0 +1,30 @@
+#InterhuludeMask div {
+	font-family: Flama;
+}
+#InterhuludeMask #InterhuludeShowName {
+	font-family: Flama;
+	text-align: left;
+	margin-left: 40px;
+	margin-top: 30px;
+	margin-bottom: 150px;
+	font-size: 32px;
+	font-weight: 300;
+}
+#InterhuludeMask #InterhuludeShowName span {
+	font-family: Flama;
+	font-weight: 500;
+}
+#InterhuludePauseOnReturn {
+	position: absolute;
+	margin: 0px auto;
+	width: 100%;
+	bottom: 100px;
+}
+
+#InterhuludeClickToDismiss {
+	font-size: 20px;
+	position: absolute;
+	margin: 0px auto;
+	width: 100%;
+	bottom: 30px;
+}

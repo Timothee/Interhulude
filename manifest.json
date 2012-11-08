@@ -11,7 +11,8 @@
 	"content_scripts": [
 		{
 			"matches": ["http://www.hulu.com/*"],
-			"js": ["interhulude.js"]
+			"js": ["interhulude.js"],
+			"css": ["interhulude.css"]
 		}
 	]
 }
