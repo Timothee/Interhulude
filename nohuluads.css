@@ -1,13 +1,13 @@
-#InterhuludeMask {
+#NoHuluAdsMask {
 	position: absolute;
 	background-color: black;
 	color: white;
 	z-index: 10000;
 }
-#InterhuludeMask div {
+#NoHuluAdsMask div {
 	font-family: Flama;
 }
-#InterhuludeMask #InterhuludeShowName {
+#NoHuluAdsMask #NoHuluAdsShowName {
 	font-family: Flama;
 	text-align: left;
 	margin-left: 40px;
@@ -16,11 +16,11 @@
 	font-size: 32px;
 	font-weight: 300;
 }
-#InterhuludeMask #InterhuludeShowName span {
+#NoHuluAdsMask #NoHuluAdsShowName span {
 	font-family: Flama;
 	font-weight: 500;
 }
-#InterhuludePauseOnReturn {
+#NoHuluAdsPauseOnReturn {
 	font-size: 26px;
 	position: absolute;
 	margin: 0px auto;
@@ -28,14 +28,14 @@
 	bottom: 100px;
 	cursor: pointer;
 }
-#InterhuludePauseOnReturn span {
+#NoHuluAdsPauseOnReturn span {
 	text-shadow: white 0px 0px 2px;
 	position: relative;
 	top: 2px;
 }
-#InterhuludePauseOnReturn.unchecked span { color: black; }
-#InterhuludePauseOnReturn.checked span { color: white; }
-#InterhuludeClickToDismiss {
+#NoHuluAdsPauseOnReturn.unchecked span { color: black; }
+#NoHuluAdsPauseOnReturn.checked span { color: white; }
+#NoHuluAdsClickToDismiss {
 	font-size: 20px;
 	position: absolute;
 	margin: 0px auto;

@@ -5,7 +5,7 @@ I just had to put it somewhere and this look like a good place.
 Provided under the MIT License.
 
 [Available in the Chrome Web
-Store.](https://chrome.google.com/webstore/detail/interhulude/cdjcidbbokfiifpnpcglbehanlligmlh)
+Store.](https://chrome.google.com/webstore/detail/no-hulu-ads/cdjcidbbokfiifpnpcglbehanlligmlh)
 
 Enjoy,
 

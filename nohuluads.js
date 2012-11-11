@@ -1,13 +1,13 @@
 (function() {
 	var player, lastStateSeen;
-	var pauseOnReturn = localStorage["Interhulude:pauseOnReturn"] || false;
+	var pauseOnReturn = localStorage["NoHuluAds:pauseOnReturn"] || false;
 	var mask = document.createElement('div');
 	var showNameDiv, pauseOnReturnDiv, dismissDiv;
 	var maskSetup = false;
 	var masked = false;
 
 	function log(message) {
-		console.log("[Interhulude] " + message);
+		console.log("[NoHuluAds] " + message);
 	}
 
 	function maskVideo() {
@@ -30,7 +30,7 @@
 	}
 
 	function togglePause() {
-		pauseOnReturn = localStorage["Interhulude:pauseOnReturn"] = !pauseOnReturn;
+		pauseOnReturn = localStorage["NoHuluAds:pauseOnReturn"] = !pauseOnReturn;
 		pauseOnReturnDiv.className = pauseOnReturn ? "checked" : "unchecked";
 	}
 
@@ -46,20 +46,20 @@
 
 	function setMask() {
 		if (!maskSetup) {
-			mask.id = "InterhuludeMask";
+			mask.id = "NoHuluAdsMask";
 
 			showNameDiv = document.createElement('div');
-			showNameDiv.id = "InterhuludeShowName";
+			showNameDiv.id = "NoHuluAdsShowName";
 			showNameDiv.innerHTML = "<span>Your show</span> will return in a moment.";
 
 			pauseOnReturnDiv = document.createElement('div');
-			pauseOnReturnDiv.id = "InterhuludePauseOnReturn";
+			pauseOnReturnDiv.id = "NoHuluAdsPauseOnReturn";
 			pauseOnReturnDiv.onclick = togglePause;
 			pauseOnReturnDiv.innerHTML = "<span>&#x2713;</span> Pause when the show comes back";
 			pauseOnReturnDiv.className = pauseOnReturn ? "checked" : "unchecked";
 
 			dismissDiv = document.createElement('div');
-			dismissDiv.id = "InterhuludeClickToDismiss";
+			dismissDiv.id = "NoHuluAdsClickToDismiss";
 			dismissDiv.innerHTML = "(click here to dismiss)";
 			dismissDiv.onclick = unmaskVideo;
 
