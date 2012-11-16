@@ -1,6 +1,6 @@
 (function() {
 	var player, lastStateSeen;
-	var pauseOnReturn = localStorage["NoHuluAds:pauseOnReturn"] || false;
+	var pauseOnReturn = localStorage["NoHuluAds:pauseOnReturn"] == "true";
 	var mask = document.createElement('div');
 	var showNameDiv, pauseOnReturnDiv, dismissDiv;
 	var maskSetup = false;
@@ -30,7 +30,7 @@
 	}
 
 	function togglePause() {
-		pauseOnReturn = localStorage["NoHuluAds:pauseOnReturn"] = !pauseOnReturn;
+		localStorage["NoHuluAds:pauseOnReturn"] = pauseOnReturn = !pauseOnReturn;
 		pauseOnReturnDiv.className = pauseOnReturn ? "checked" : "unchecked";
 	}
 
