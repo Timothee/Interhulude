@@ -10,6 +10,11 @@
 		console.log("[NoHuluAds] " + message);
 	}
 
+	function getShowName() {
+		return document.getElementsByClassName('show-title')[0] ?
+			document.getElementsByClassName('show-title')[0].innerHTML.replace(/^\s+/, '').replace(/\s+$/, '') : "Your show";
+	}
+
 	function maskVideo() {
 		setMask();
 		log("Masking video");
@@ -40,8 +45,7 @@
 		mask.style.top = player.offsetTop + "px";
 		mask.style.left = player.offsetLeft + "px";
 
-		var showName = document.getElementsByClassName('show-title')[0] ? document.getElementsByClassName('show-title')[0].innerHTML : "Your show";
-		showNameDiv.innerHTML = "<span>" + showName + "</span> will return in a moment.";
+		showNameDiv.innerHTML = "<span>" + getShowName() + "</span> will return in a moment.";
 	}
 
 	function setMask() {
@@ -85,6 +89,7 @@
 				if (currentState == "content") {
 					if (masked) {
 						unmaskVideo();
+						chrome.extension.sendMessage({action: "notification", showName: getShowName()}, function() { log("Notified");});
 					}
 					if (pauseOnReturn) {
 						player.pauseVideo();
