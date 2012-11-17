@@ -94,7 +94,7 @@
 			if (currentState != lastStateSeen && currentState != "loading") {
 				lastStateSeen = currentState;
 				if (currentState == "content") {
-					chrome.extension.sendMessage({action: "notification", showName: getShowName()}, function() { log("Notified");});
+					chrome.extension.sendMessage({action: "notification", pauseOnReturn: pauseOnReturn, showName: getShowName()}, function() { log("Notified");});
 					if (masked) {
 						unmaskVideo();
 					}
