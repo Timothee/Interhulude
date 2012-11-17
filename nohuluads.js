@@ -6,6 +6,13 @@
 	var maskSetup = false;
 	var masked = false;
 
+	chrome.extension.onMessage.addListener(
+		function(request, sender, sendResponse) {
+			if (request.action == "resumeVideo") {
+				player.resumeVideo();
+			}
+	});
+
 	function log(message) {
 		console.log("[NoHuluAds] " + message);
 	}
@@ -87,9 +94,9 @@
 			if (currentState != lastStateSeen && currentState != "loading") {
 				lastStateSeen = currentState;
 				if (currentState == "content") {
+					chrome.extension.sendMessage({action: "notification", showName: getShowName()}, function() { log("Notified");});
 					if (masked) {
 						unmaskVideo();
-						chrome.extension.sendMessage({action: "notification", showName: getShowName()}, function() { log("Notified");});
 					}
 					if (pauseOnReturn) {
 						player.pauseVideo();

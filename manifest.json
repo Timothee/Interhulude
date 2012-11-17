@@ -19,7 +19,8 @@
 		}
 	],
 	"permissions": [
-		"notifications"
+		"notifications",
+		"tabs"
 	],
 	"web_accessible_resources": [
 		"images/logo-48x48.png"

@@ -3,9 +3,15 @@ chrome.extension.onMessage.addListener(
 		if (request.action == "notification") {
 			var notification = webkitNotifications.createNotification(
 				chrome.extension.getURL("images/logo-48x48.png"),
-				"Your show has returned" ,
-				request.showName + " has returned from commercial break."
+				request.showName,
+				"Your show has returned. Click to watch."
 			);
+			notification.onclick = function() {
+				notification.close();
+				chrome.tabs.update(sender.tab.id, {active: true});
+				chrome.windows.update(sender.tab.windowId, {focused: true});
+				chrome.tabs.sendMessage(sender.tab.id, {action: "resumeVideo"}, null);
+			};
 			notification.show();
 		}
 });
