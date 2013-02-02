@@ -16,7 +16,16 @@ and removed some of their player's APIs, namely `getCurrentState`, `mute` and `p
 
 Fair game.
 
-It was fun while it lasted…
+If it isn't clear, the new code periodically looks for the element with ID `NoHuluAdsMask` (the mask I create) and removes it from the DOM.
+There are a couple of interesting things: first of all, they do that only if your browser is Chrome.
+Why not do that for all browsers? Probably not to add unnecessary work for other browsers, but it seems a bit of premature optimization.
+
+The second thing I find interesting is how they calculate the interval to use: `(new Date).getTime() % 2e3 + 2e3`.
+The 2000-modulo of the current time (in milliseconds), plus 2000. So the interval can vary from 2000 to 3999, or 2 to 4s.
+I find it odd there could be so much variance in the interval length, depending on when the code is actually run.
+However, I imagine it's so that it scatters the various intervals set in other places… This doesn't seem to be a very valid concern.
+
+Anyway, it was fun while it lasted… I kind of wish I had kept it for myself, so that it would still work. :)
 
 This is thus for educational purposes only.
 
