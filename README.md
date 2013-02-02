@@ -1,3 +1,27 @@
+As featured in [LifeHacker](http://lifehacker.com/5977679/no-hulu-ads-mutes-annoying-ads-on-hulu) and [Mashable](http://mashable.com/2013/01/21/hulu-ad-blocking/).
+
+Yay! Except that it got the attention of Hulu's team which worked to counter the extension.
+
+In particular, they added the following:
+
+    var a = "#NoHuluAdsMask"; 
+    $.client && $.client.browser == "Chrome" && window.setInterval(function() {
+    var b = document.location;
+    if (!/\/watch\/(\d+)/.test(b.pathname)) return;
+    var c = $(a);
+    c.length > 0 && c.remove();
+    }, (new Date).getTime() % 2e3 + 2e3);
+
+and removed some of their player's APIs, namely `getCurrentState`, `mute` and `pauseVideo`, removing all hope of working around that again.
+
+Fair game.
+
+It was fun while it lasted…
+
+This is thus for educational purposes only.
+
+--
+
 Hello there,
 
 this is just a few lines of JavaScript that mutes the ads on Hulu, packaged in a Chrome extension.
